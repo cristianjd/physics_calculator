@@ -3,57 +3,95 @@ require "physics_calculator/version"
 module PhysicsCalculator
 
   include Math
-  require 'matrix'                          # methods for matrix and vector manipulation
+  # methods for matrix and vector manipulation
+  require 'matrix'
 
   # extend standard library vector class
 
   class ::Vector
 
-    # dot_product as alias for cross product
-    def dot_product(v)
-      self.inner_product(v)
+    # dot_product as alias for inner product
+    def dot_product(v_)
+      self.inner_product(v_)
     end
 
     # define cross product
-    def cross_product_(v)
-      raise ArgumentError, 'Vectors must be 3D' if (self.size != 3 || v.size != 3)
-      Vector.[](self[1]*v[2] - self[2]*v[1], self[2]*v[0] - self[0]*v[2], self[0]*v[1] - self[1]*v[0])
+    def cross_product_(v_)
+      raise ArgumentError, 'Vectors must be 3D' if (self.size != 3 || v_.size != 3)
+      Vector.[](self[1]*v_[2] - self[2]*v_[1], self[2]*v_[0] - self[0]*v_[2], self[0]*v_[1] - self[1]*v_[0])
     end
 
     # define distance between two vectors
-    def distance(v)
-      (self - v).r
+    def distance(v_)
+      (self - v_).r
     end
 
     # define unit vector pointing from v to self
-    def unit_(v)
-      (self - v).normalize
+    def unit_(v_)
+      (self - v_).normalize
     end
 
   end
 
   # Physical Constants (SI Units)
 
-  SPEED_LIGHT = 299792458.0               # speed of light in a vacuum (m/s)
-  PLANCK = 6.62606957e-34                 # planck's constant (J*s)
-  PLANCK_REDUCED = 1.054571726e-34        # reduced planck's constant
-  PERMITTIVITY = 8.854187817e-12          # vacuum permittivity (F/m)
-  PERMEABILITY = 1.2566370614e-6          # vacuum permeability ((V*s)/(A*m))
-  CHARGE_ELEMENTARY = 1.602176565e-19     # elementary charge (C)
-  FINE_STRUCTURE = 7.2973525698e-3        # fine structure constant (dimensionless)
-  MASS_ELECTRON = 9.10938215e-31          # electron rest mass (kg)
-  MASS_PROTON = 1.672621777e-27           # proton rest mass (kg)
-  MASS_NEUTRON = 1.674927351e-27          # neutron rest mass (kg)
-  MASS_EARTH = 5.97217e24                 # mass of the Earth (kg)
-  MASS_SUN = 1.98855e30                   # mass of the Sun (kg)
-  MASS_MOON = 7.3477e22                   # mass of the Moon (kg)
-  GRAVITATIONAL = 6.67384e-11             # gravitational constant ((N*m^2)/kg^2))
-  ACCELERATION_GRAVITY = 9.80665          # acceleration due to gravity on Earth's surface (m/s^2)
-  BOLTZMANN = 1.3806488e-23               # Boltzmann constant
-  ENERGY_BINDING = -2.1799e-19            # energy of ground state of electron in hydrogen atom (Joules)
-  RYDBERG = 1.09739e7                     # Rydberg constant (1/m)
+
+  # speed of light in a vacuum (m/s)
+  SPEED_LIGHT = 299792458.0
+
+  # planck's constant (J*s)
+  PLANCK = 6.62606957e-34
+
+  # reduced planck's constant
+  PLANCK_REDUCED = 1.054571726e-34
+
+  # vacuum permittivity (F/m)
+  PERMITTIVITY = 8.854187817e-12
+
+  # vacuum permeability ((V*s)/(A*m))
+  PERMEABILITY = 1.2566370614e-6
+
+  # elementary charge (C)
+  CHARGE_ELEMENTARY = 1.602176565e-19
+
+  # fine structure constant (dimensionless)
+  FINE_STRUCTURE = 7.2973525698e-3
+
+  # electron rest mass (kg)
+  MASS_ELECTRON = 9.10938215e-31
+
+  # proton rest mass (kg)
+  MASS_PROTON = 1.672621777e-27
+
+  # neutron rest mass (kg)
+  MASS_NEUTRON = 1.674927351e-27
+
+  # mass of the Earth (kg)
+  MASS_EARTH = 5.97217e24
+
+  # mass of the Sun (kg)
+  MASS_SUN = 1.98855e30
+
+  # mass of the Moon (kg)
+  MASS_MOON = 7.3477e22
+
+  # gravitational constant ((N*m^2)/kg^2))
+  GRAVITATIONAL = 6.67384e-11
+
+  # acceleration due to gravity on Earth's surface (m/s^2)
+  ACCELERATION_GRAVITY = 9.80665
+
+  # Boltzmann constant
+  BOLTZMANN = 1.3806488e-23
+
+  # energy of ground state of electron in hydrogen atom (Joules)
+  ENERGY_BINDING = -2.1799e-19
+
+  # Rydberg constant (1/m)
+  RYDBERG = 1.09739e7
 
   # Aliases for convenience
+
 
   C = SPEED_LIGHT
   G = GRAVITATIONAL
@@ -117,7 +155,7 @@ module PhysicsCalculator
     (position_ - axis_).cross_product_(force_)
   end
 
-  # angular momentum from momentum mass*velocity_ around axis vector (vector in J * s)
+  # angular momentum from momentum mass*velocity_ around axis_ (vector in J * s)
   def angular_momentum_(axis_, position_, mass, velocity_)
     (position_ - axis_).cross_product_(momentum_(mass,velocity_))
   end
@@ -137,7 +175,7 @@ module PhysicsCalculator
     moment_inertia_cm + mass*axis_distance**2
   end
 
-  # moment of inertia of mass at distance away from axis of rotation(scalar in kg * m^2)
+  # moment of inertia of mass at distance away from axis of rotation (scalar in kg * m^2)
   def moment_inertia_point_mass(mass, distance)
     mass * distance**2
   end
@@ -166,7 +204,7 @@ module PhysicsCalculator
   # quantum mechanics
 
 
-  # de Broglie wavelength for a particle with momentum p (scalar in meters)
+  # de Broglie wavelength for a particle with momentum (scalar in meters)
   def wavelength_de_broglie(momentum)
     PLANCK / momentum
   end
