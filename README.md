@@ -6,4 +6,4 @@ To use constants and methods in current project use `require 'physics_calculator
 
 # Documentation
 
-A list of constants and methods available in this gem can be found at [](http://rubydoc.info/gems/physics_calculator/0.0.2/frames).
+A list of constants and methods available in this gem can be found at [Ruby-Doc.org](http://rubydoc.info/gems/physics_calculator/0.0.2/frames).
