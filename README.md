@@ -2,7 +2,7 @@
 
 Install at command prompt: `gem install physics_calculator`.
 
-To use constants and methods into project use `require physics_calculator` and `include PhysicsCalculator`.
+To use constants and methods into project use `require 'physics_calculator'` and `include PhysicsCalculator`.
 
 # Documentation
 
